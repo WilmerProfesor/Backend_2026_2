@@ -1,0 +1,16 @@
+[
+    {
+        "nombres": "wilmer arley",
+        "apellidos": "patiño perdomo",
+        "edad": 35,
+        "sexo": true,
+        "estatura": 1.72
+    },
+    {
+        "nombres": "Ana María",
+        "apellidos": "Cruz Pérez",
+        "edad": 28,
+        "sexo": false,
+        "estatura": 1.56
+    }
+]

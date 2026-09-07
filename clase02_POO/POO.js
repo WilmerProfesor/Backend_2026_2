@@ -8,8 +8,8 @@ import { Persona } from "./Persona.js";
 //     }
 // };
 
-// { key:valor }
-// { "key": "valor" }. JSON.stringify(persona) // convierte el objeto a un string JSON
+{  key:   valor  }
+{ "key": "valor" }. JSON.stringify(persona) // convierte el objeto a un string JSON
 
 
 
