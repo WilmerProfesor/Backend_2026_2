@@ -1,25 +1,27 @@
 import fs from 'fs'
+import { User } from './User.js';
 
 export class ManagerUser{
+
     constructor(pathFile){
-        this.pathFile=pathFile;
+        this.pathFile=pathFile;        
     }
 
-    async createUser(newUser){
-        const user = {
-            id: 0, 
-            nombre: newUser.nombre ?? "Sin nombre",
-            apellido: newUser.apellido ?? 'sin apellido', 
-            edad: newUser.edad ?? 18, 
-            rol: newUser.rol ?? 'estudiante'
-        };
+    async createUser(newUser){                
+        const user= new User(newUser);
+        // const user = {
+        //     id: 0, 
+        //     nombre: newUser.nombre ?? "Sin nombre",
+        //     apellido: newUser.apellido ?? 'sin apellido', 
+        //     edad: newUser.edad ?? 18, 
+        //     rol: newUser.rol ?? 'estudiante'
+        // };
         const users= await this.getUsers();
-        console.log(users);
+        // console.log(users);
         const usersJson= JSON.parse(users);
-        console.log(usersJson);
-        usersJson.push(user);
-        console.log("xxxxxxxxxx")
-        console.log(usersJson);
+        // console.log(usersJson);
+        usersJson.push(user);        
+        // console.log(usersJson);
         try {            
             await fs.promises.writeFile(this.pathFile,JSON.stringify(usersJson,null,"\t"));
         } catch (error) {
@@ -30,8 +32,7 @@ export class ManagerUser{
 
     async getUsers(){
         try {
-            const users= await fs.promises.readFile(this.pathFile,'utf-8');
-            console.log(users);
+            const users= await fs.promises.readFile(this.pathFile,'utf-8');            
             return users;            
         } catch (error) {
             console.error("No hay archivo");
