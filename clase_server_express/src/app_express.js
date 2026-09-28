@@ -1,11 +1,16 @@
-const http = require("http"); // importamos el módulo HTTP de NODE
+// 1. inicializar npm: npm init-y
+// 2. instalar express: npm i express
+// 3. ir a la documentación de express y crear el server
+// https://expressjs.com/es/
 
-//  datos de prueba +++++++++++++++++++++++++++
+import express from "express";
+// const express = require('express');
+
 const data = [
     {
         "id": 1,
         "name": "Goku",
-        "ki": "60.000.000",
+        "ki": "60",
         "maxKi": "90 Septillion",
         "race": "Saiyan",
         "gender": "Male",
@@ -17,7 +22,7 @@ const data = [
     {
         "id": 2,
         "name": "Vegeta",
-        "ki": "54.000.000",
+        "ki": "54",
         "maxKi": "19.84 Septillion",
         "race": "Saiyan",
         "gender": "Male",
@@ -29,7 +34,7 @@ const data = [
     {
         "id": 3,
         "name": "Piccolo",
-        "ki": "2.000.000",
+        "ki": "20",
         "maxKi": "500.000.000",
         "race": "Namekian",
         "gender": "Male",
@@ -41,7 +46,7 @@ const data = [
     {
         "id": 4,
         "name": "Bulma",
-        "ki": "0",
+        "ki": "10",
         "maxKi": "0",
         "race": "Human",
         "gender": "Female",
@@ -53,7 +58,7 @@ const data = [
     {
         "id": 5,
         "name": "Freezer",
-        "ki": "530.000",
+        "ki": "5",
         "maxKi": "52.71 Septillion",
         "race": "Frieza Race",
         "gender": "Male",
@@ -63,27 +68,41 @@ const data = [
         "deletedAt": null
     }
 ]
-// FIN  datos de prueba +++++++++++++++++++++++++++
 
-//creamos el servidor 
+const app = express()
+const port = 3000
 
-const server = http.createServer((request, response) => {
-    // se crean los end points
-    if (request.url === '/' && request.method === "GET") {
-        response.end("HOla Mundo desde el backend");
-    } else if (request.url === '/otra' && request.method === "GET") {
-        response.end("OTRA RUTA");
-    }else if (request.url === '/data' && request.method === "GET") {
-        response.end(JSON.stringify(data));
+app.get('/', (req, res) => {
+    res.send('<h1 style="color: red">Hello World!</h1>')
+})
+
+app.get('/data', (req, res) => {
+    res.send(data);    
+})
+
+app.get('/data/:id', (req, res) => {
+    const id= req.params.id;
+    const encontrado= data.find((character)=>character.id==id);
+    if(encontrado){
+        res.send(encontrado);    
+    }else{
+        res.send(`error: No se encontró un personaje con id: ${id}`);    
     }
-});
+})
 
-const PORT = 8083;  // se designa un puerto para que el servidor escuche 
+app.get('/data/filtro/:gender/:ki', (req, res) => {
+    // const gender= req.params.gender;
+    // const ki= req.params.ki;
+    const {gender, ki}= req.params;        
+    const encontrado= data.filter((character)=>character.gender==gender && Number(character.ki)> Number(ki));
+    if(encontrado.length>0){
+        res.send(encontrado);    
+    }else{
+        res.send(`error: No se encontraron personages con género: ${gender}`);    
+    }
+})
 
-// se coloca el servidor a escuchar con la función listen
-server.listen(PORT, () => {
-    console.log(`Servidor escuchando en el puerto ${PORT}`);
-
-}).on('error', (error) => {
-    console.error(`Error en el servidor PUERTO: ${PORT}`)
+app.listen(port, () => {
+    console.log(`Example app listening on port http://localhost:${port}`)
+    //   console.log(`Example app listening on port ${port}`)
 })
