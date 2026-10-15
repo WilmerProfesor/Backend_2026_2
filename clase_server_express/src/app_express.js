@@ -90,10 +90,18 @@ app.get('/data/:id', (req, res) => {
     }
 })
 
-app.get('/data/filtro/:gender/:ki', (req, res) => {
-    // const gender= req.params.gender;
-    // const ki= req.params.ki;
+app.get('/data/filtro/:gender/:ki', (req, res) => {    
     const {gender, ki}= req.params;        
+    const encontrado= data.filter((character)=>character.gender==gender && Number(character.ki)> Number(ki));
+    if(encontrado.length>0){
+        res.send(encontrado);    
+    }else{
+        res.send(`error: No se encontraron personages con género: ${gender}`);    
+    }
+})
+
+app.get('/data/queryexample', (req, res) => {    
+    const {gender, ki}= req.query;        
     const encontrado= data.filter((character)=>character.gender==gender && Number(character.ki)> Number(ki));
     if(encontrado.length>0){
         res.send(encontrado);    
