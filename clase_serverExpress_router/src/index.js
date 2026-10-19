@@ -1,7 +1,5 @@
-import express from 'express';
+import express from 'express';  //-> const express = require('express');
 import { __dirname } from './util.js';
-
-
 import usersRouter from './routes/users.router.js';
 import productsRouter from './routes/products.router.js';
 
@@ -23,5 +21,5 @@ app.get('/', (req, res) => {
 
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`)
+  console.log(`Example app listening on port http://localhost:${PORT}`)
 })
