@@ -6,7 +6,7 @@ const app = express();
 const port = 3000;
 
 app.engine("handlebars", handlebars.engine());
-app.set("views",__dirname+"/views");
+app.set("views",__dirname+"/views");  //ruta por eso está en plural como el folder
 app.set("view engine", "handlebars")
 
 

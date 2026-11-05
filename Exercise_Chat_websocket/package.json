@@ -1,0 +1,19 @@
+{
+  "name": "exercise_chat_websocket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node --watch src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "S:p.c.",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "express": "^5.3.0",
+    "express-handlebars": "^9.0.4",
+    "socket.io": "^4.8.4"
+  }
+}
