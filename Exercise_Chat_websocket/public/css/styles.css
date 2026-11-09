@@ -8,8 +8,9 @@ body{
 }
 
 #chatContainer{
+    margin-top: 20px;
     background-color: aliceblue;
     border: solid 1px gray;
     border-radius: 10px;
-
+    min-height: 200px;
 }
